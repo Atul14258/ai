@@ -1,0 +1,21 @@
+ADL script for spare tyre problem
+
+Consider the problem of changing a flat tire. More precisely, the goal is to have a good-spare tire properly mounted onto the car's axle where the initial state has a flat tire on the axle and a good spare tire in the trunk) To keep it simple, our version of the problem is a very abstract one, with no sticky lug nuts or other complications. There are just four actions: removing the spare from the trunk, removing the flat tire from the axle, putting the spare on the axle, and leaving the car unattended overnight. We assume that the car is in a particularly bad neighbourhood, so that the effect of leaving it overnight is that the tires disappear.
+The ADL description of the problem is shown in Figure 6.3. Notice that it is purely prepositional. It goes beyond strips in that it uses a negated precondition, At(Flat, Axle), for the PutOn(Spare, Axle) action. This could be avoided by using Clear(Axle) instead, as we will see in the next example.
+
+Consider problem of changing flat tire. There are just 4 actions: removing spare from trunk, removing flat tire from axle, putting spare tire on axle, and leaving car unattended overnight.
+ADL description is as shown. It uses negated precondition,negation. This could be avoided by using Clear (Axle) instead. As we see in next example.
+Solution using Strips:
+
+* Init(At(Flat,Axle)̂At(Spare,Trunk))
+* Goal(At(Spare,Axle)) Action(remove(Spare,Trunk),
+* PRECOND ; At(Spare,Trunk)
+* EFFECT :̚At(Spare,trunk)˄A t(Spare, Ground)
+* Action(Remove(Flat,Axle), • PRECOND:At(Flat,Axle)
+* EFFECT :̚At(Flat,,Axle)˄A t(Flat, Ground)
+* Action(PutOn(Spare,Axle),
+* PRECOND ; At(Spare,Ground)˄̚At(Flat,Axle)
+* EFFECT:̚At(Spare,Ground) ˄̚At(Spare,Axle))
+* Action(LeaveOvernight)
+* PRECOND
+* EFFECT :̚At(Spare,Ground)˄A t(Spare, Axle)̚˄At(Spare,trunk)˄ ̚At(Flat,Ground)˄̚At(Flat,Axle))
